@@ -3,14 +3,21 @@
   hosts: dockerhost
 
   tasks:
-    - name: install repository EPEL
-      yum:
-        name: epel-release
-        state: installed
+    - name: Create Yum Repo
+      yum_repository:
+        name: "docker"
+        description: "this is a docker repo"
+        reposdir: "/etc/yum.repos.d/"
+        baseurl: "https://download.docker.com/linux/centos/7/x86_64/stable/"
+        gpgcheck : "no"
+        enabled: yes
+
+    - name: run yum repolist
+      command: yum repolist
 
     - name: install docker
       yum:
-        name: docker
+        name: docker-ce
         state: latest
 
     - name: start and enable docker
