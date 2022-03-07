@@ -1,0 +1,20 @@
+---
+- name: install docker on rhel8 host
+  hosts: dockerhost
+
+  tasks:
+    - name: install repository EPEL
+      yum:
+        name: epel-release
+        state: installed
+
+    - name: install docker
+      yum:
+        name: docker
+        state: latest
+
+    - name: start and enable docker
+      systemd:
+        name: docker
+        state: started
+        enabled: yes
