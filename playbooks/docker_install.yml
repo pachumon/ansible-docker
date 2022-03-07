@@ -14,11 +14,19 @@
 
     - name: run yum repolist
       command: yum repolist
+    
+    - name: run docker cmd
+      command: yum install -y --nobest docker-ce
 
-    - name: install docker
-      yum:
-        name: docker-ce
-        state: latest
+    - name: Check Package
+      package:
+        name: "docker-ce"
+        state: present
+
+#    - name: install docker
+#      yum:
+#        name: docker-ce
+#        state: latest
 
     - name: start and enable docker
       systemd:
