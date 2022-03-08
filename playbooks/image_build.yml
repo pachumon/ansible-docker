@@ -3,10 +3,25 @@
   hosts: all
   become: true
 
+  vars:
+    ansible_python_interpreter: "/usr/bin/python3"
+
   tasks:
+
+    - name: Log into DockerHub
+      community.docker.docker_login:
+        username: 
+        password: 
+      register: login
+
+    - name: show login information
+      debug:
+        var: login
+
     - name: create an image from the docker file in current directory
       docker_image:
-        name: pachumon/demo_image
+        name: pachumon/demo_image:v2
         build:
-          path: /home/azureuser/ansible-docker
-        source: ../build
+          path: /home/azureuser/ansible-docker/build
+        source: build
+        push: yes
