@@ -1,0 +1,12 @@
+---
+- name: create container image
+  hosts: all
+  become: true
+
+  tasks:
+    - name: create an image from the docker file in current directory
+      docker_image:
+        name: pachumon/demo_image
+        build:
+          path: /home/azureuser/ansible-docker
+        source: ../build
