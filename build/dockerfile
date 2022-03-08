@@ -1,0 +1,7 @@
+FROM centos
+LABEL version="1.0" \
+      description="this is a simple container image" \
+      creationDate="08 mar 2022"
+
+ENV VAR1="hello" \
+    VAR2="world"
