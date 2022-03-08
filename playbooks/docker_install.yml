@@ -40,7 +40,7 @@
         state: latest
       
     - name: start and enable docker
-      system:
+      systemd:
         name: docker
         state: started
         enabled: yes
