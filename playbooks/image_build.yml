@@ -10,8 +10,8 @@
 
     - name: Log into DockerHub
       community.docker.docker_login:
-        username: 
-        password: 
+        username: ""
+        password: ""
       register: login
 
     - name: show login information
@@ -20,7 +20,7 @@
 
     - name: create an image from the docker file in current directory
       docker_image:
-        name: pachumon/demo_image:v2
+        name: docker.io/pachumon/demo_image:v3
         build:
           path: /home/azureuser/ansible-docker/build
         source: build
