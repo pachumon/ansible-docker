@@ -33,3 +33,15 @@
       yum:
         name: epel-release
         state: installed      
+
+    - name: install docker
+      yum:
+        name: docker
+        state: latest
+      
+    - name: start and enable docker
+      system:
+        name: docker
+        state: started
+        enabled: yes
+         
