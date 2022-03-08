@@ -12,6 +12,11 @@
       when: 
         - ansible_facts['distribution'] == "RedHat"
 
+    - name: Print the ansible_fact
+      ansible.builtin.debug:
+        msg: "{{ ansible_facts['distribution'] }}"
+      #when: ansible_default_ipv4.gateway is defined
+
     - name: enable rhel repositories
       community.general.rhsm_repository:
         name: "{{ item }}"
