@@ -44,4 +44,9 @@
         name: docker
         state: started
         enabled: yes
+
+    - name: Git checkout
+      ansible.builtin.git:
+        repo: 'https://github.com/pachumon/ansible-docker.git'
+        dest: /home/azureuser
          
