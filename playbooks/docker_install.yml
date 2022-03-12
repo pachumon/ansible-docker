@@ -45,8 +45,14 @@
         state: started
         enabled: yes
 
+    - name: Install a list of packages (suitable replacement for 2.11 loop deprecation warning)
+      yum:
+        name:
+          - git
+        state: present
+
     - name: Git checkout
       ansible.builtin.git:
         repo: 'https://github.com/pachumon/ansible-docker.git'
-        dest: /home/azureuser
+        dest: /home/azureuser/ansible-docker
          
