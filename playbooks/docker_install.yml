@@ -1,7 +1,7 @@
 ---
 - name: install docker on rhel7.7 host
   hosts: dockerhost
-  become: true
+  become: false
   # vars:
   #   rhuname: ""
   #   rhupwd: ""

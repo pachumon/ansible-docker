@@ -1,7 +1,7 @@
 ---
 - name: create container image
   hosts: all
-  become: true
+  become: false
   # vars: 
   #   duname: ""
   #   dupwd: ""
