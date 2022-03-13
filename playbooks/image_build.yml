@@ -2,6 +2,9 @@
 - name: create container image
   hosts: all
   become: true
+  # vars: 
+  #   duname: ""
+  #   dupwd: ""
 
   vars:
     ansible_python_interpreter: "/usr/bin/python3"
@@ -10,8 +13,8 @@
 
     - name: Log into DockerHub
       community.docker.docker_login:
-        username: ""
-        password: ""
+        username: "{{ duname }}"
+        password: "{{ dupwd }}"
       register: login
 
     - name: show login information

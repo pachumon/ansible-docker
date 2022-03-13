@@ -2,15 +2,18 @@
 - name: install docker on rhel7.7 host
   hosts: dockerhost
   become: true
+  # vars:
+  #   rhuname: ""
+  #   rhupwd: ""
 
   tasks:
-  # install this collection from galaxy : ansible-galaxy collection install community.general
+    # install this collection from galaxy : ansible-galaxy collection install community.general
     - name: is this registered RHEL host
       community.general.redhat_subscription:
         state: present
-        username: ""
-        password: ""
-      when: 
+        username: "{{ rhuname }}"
+        password: "{{ rhupwd }}"
+      when:
         - ansible_facts['distribution'] == "RedHat"
 
     - name: Print the ansible_fact
@@ -22,7 +25,7 @@
       community.general.rhsm_repository:
         name: "{{ item }}"
         state: enabled
-      loop: 
+      loop:
         - rhel-7-server-rpms
         - rhel-7-server-extras-rpms
       when:
@@ -32,18 +35,7 @@
     - name: install repository- EPEL
       yum:
         name: epel-release
-        state: installed      
-
-    - name: install docker
-      yum:
-        name: docker
-        state: latest
-      
-    - name: start and enable docker
-      systemd:
-        name: docker
-        state: started
-        enabled: yes
+        state: installed
 
     - name: Install a list of packages (suitable replacement for 2.11 loop deprecation warning)
       yum:
@@ -51,8 +43,18 @@
           - git
         state: present
 
+    - name: install docker
+      yum:
+        name: docker
+        state: latest
+
+    - name: start and enable docker
+      systemd:
+        name: docker
+        state: started
+        enabled: yes
+
     - name: Git checkout
       ansible.builtin.git:
-        repo: 'https://github.com/pachumon/ansible-docker.git'
+        repo: "https://github.com/pachumon/ansible-docker.git"
         dest: /home/azureuser/ansible-docker
-         
